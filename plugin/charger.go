@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/evcc-io/evcc/api"
-	charger "github.com/evcc-io/evcc/charger/config"
+
 	"github.com/evcc-io/evcc/util"
 	"github.com/evcc-io/evcc/util/config"
 	"github.com/spf13/cast"
@@ -28,13 +28,8 @@ func NewChargerEnableFromConfig(ctx context.Context, other map[string]any) (Plug
 		return nil, err
 	}
 
-	charger, err := charger.NewFromConfig(ctx, cc.Config.Type, cc.Config.Other)
-	if err != nil {
-		return nil, err
-	}
-
 	o := &switchChargerPlugin{
-		charger: charger,
+		charger: nil,
 	}
 
 	return o, nil
