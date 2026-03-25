@@ -3,7 +3,7 @@ import { start, stop, restart, baseUrl } from "./evcc";
 import { expectModalHidden, newLoadpoint, addDemoCharger, ChargerStatus } from "./utils";
 test.use({ baseURL: baseUrl() });
 
-const CONFIG_BATTERY = "battery-settings.evcc.yaml";
+const CONFIG_BATTERY = "battery-settings.ems.yaml";
 
 test.afterEach(async () => {
   await stop();

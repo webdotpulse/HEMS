@@ -8,7 +8,7 @@ import {
 } from "./utils";
 test.use({ baseURL: baseUrl() });
 
-const BASIC = "basics.evcc.yaml";
+const BASIC = "basics.ems.yaml";
 
 test("set initial password", async ({ page }) => {
   await start(BASIC, null, "");

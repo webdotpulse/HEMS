@@ -27,7 +27,6 @@ import (
 	"github.com/evcc-io/evcc/api"
 	"github.com/evcc-io/evcc/util"
 	"github.com/evcc-io/evcc/util/modbus"
-	"github.com/evcc-io/evcc/util/sponsor"
 )
 
 // Amperfied charger implementation
@@ -86,8 +85,6 @@ func NewAmperfied(ctx context.Context, uri string, slaveID uint8, phases bool) (
 		return nil, err
 	}
 
-	if !sponsor.IsAuthorized() {
-		return nil, api.ErrSponsorRequired
 	}
 
 	log := util.NewLogger("amperfied")

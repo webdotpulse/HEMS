@@ -7,7 +7,7 @@ products:
     description:
       generic: SCharger-22KT-S0
 requirements:
-  evcc: ["sponsorship", "skiptest"]
+  evcc: ["skiptest"]
 params:
   - preset: ocpp
 render: |

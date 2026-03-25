@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { start, stop, baseUrl } from "./evcc";
 import { expectModalVisible } from "./utils";
 
-const CONFIG_HOST_PATTERN = "config-host-pattern.evcc.yaml";
+const CONFIG_HOST_PATTERN = "config-host-pattern.ems.yaml";
 
 test.use({ baseURL: baseUrl() });
 

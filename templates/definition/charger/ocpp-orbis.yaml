@@ -5,7 +5,7 @@ products:
     description:
       generic: Viaris
 requirements:
-  evcc: ["sponsorship", "skiptest"]
+  evcc: ["skiptest"]
 params:
   - preset: ocpp
 render: |

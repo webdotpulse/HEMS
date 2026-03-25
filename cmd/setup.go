@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -10,7 +9,6 @@ import (
 	"slices"
 	"strconv"
 	"strings"
-	"sync"
 	"time"
 
 	paho "github.com/eclipse/paho.mqtt.golang"
@@ -47,7 +45,6 @@ import (
 	_ "github.com/evcc-io/evcc/util/service"
 	"github.com/evcc-io/evcc/util/sponsor"
 	"github.com/evcc-io/evcc/util/templates"
-	"github.com/evcc-io/evcc/vehicle"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/libp2p/zeroconf/v2"
@@ -372,125 +369,7 @@ func configureChargers(static []config.Named, names ...string) error {
 	return eg.Wait()
 }
 
-func vehicleInstance(cc config.Named) (api.Vehicle, error) {
-	ctx := util.WithLogger(context.TODO(), util.NewLogger(cc.Name))
 
-	props, err := customDevice(cc.Other)
-
-	var instance api.Vehicle
-	if err == nil {
-		instance, err = vehicle.NewFromConfig(ctx, cc.Type, props)
-	}
-
-	if err != nil {
-		if _, ok := errors.AsType[*util.ConfigError](err); ok {
-			return nil, err
-		}
-
-		// wrap non-config vehicle errors to prevent fatals
-		log.ERROR.Printf("creating vehicle %s failed: %v", cc.Name, err)
-		instance = vehicle.NewWrapper(cc.Name, cc.Type, cc.Other, err)
-	}
-
-	// ensure vehicle config has title
-	if instance.GetTitle() == "" {
-		//lint:ignore SA1019 as Title is safe on ascii
-		instance.SetTitle(strings.Title(cc.Name))
-	}
-
-	return instance, nil
-}
-
-func configureVehicles(static []config.Named, names ...string) error {
-	var mu sync.Mutex
-	var eg errgroup.Group
-
-	// stable-sort vehicles by name
-	devs1 := make([]config.Device[api.Vehicle], 0, len(static))
-
-	for i, cc := range static {
-		if cc.Name == "" {
-			return fmt.Errorf("cannot create vehicle %d: missing name", i+1)
-		}
-
-		if len(names) > 0 && !slices.Contains(names, cc.Name) {
-			continue
-		}
-
-		if err := nameValid(cc.Name); err != nil {
-			return fmt.Errorf("cannot create vehicle %d: %w", i+1, err)
-		}
-
-		eg.Go(func() error {
-			instance, err := vehicleInstance(cc)
-			if err != nil {
-				return fmt.Errorf("cannot create vehicle '%s': %w", cc.Name, err)
-			}
-
-			mu.Lock()
-			defer mu.Unlock()
-			devs1 = append(devs1, config.NewStaticDevice(cc, instance))
-
-			return nil
-		})
-	}
-
-	// append devices from database
-	configurable, err := config.ConfigurationsByClass(templates.Vehicle)
-	if err != nil {
-		return err
-	}
-
-	// stable-sort vehicles by id
-	devs2 := make([]config.ConfigurableDevice[api.Vehicle], 0, len(configurable))
-
-	for _, conf := range configurable {
-		eg.Go(func() error {
-			cc := conf.Named()
-
-			if len(names) > 0 && !slices.Contains(names, cc.Name) {
-				return nil
-			}
-
-			instance, err := vehicleInstance(cc)
-			if err != nil {
-				return fmt.Errorf("cannot create vehicle '%s': %w", cc.Name, err)
-			}
-
-			mu.Lock()
-			defer mu.Unlock()
-			devs2 = append(devs2, config.NewConfigurableDevice(&conf, instance))
-
-			return nil
-		})
-	}
-
-	if err := eg.Wait(); err != nil {
-		return err
-	}
-
-	slices.SortFunc(devs1, func(i, j config.Device[api.Vehicle]) int {
-		return cmp.Compare(strings.ToLower(i.Config().Name), strings.ToLower(j.Config().Name))
-	})
-
-	for _, dev := range devs1 {
-		if err := config.Vehicles().Add(dev); err != nil {
-			return err
-		}
-	}
-
-	slices.SortFunc(devs2, func(i, j config.ConfigurableDevice[api.Vehicle]) int {
-		return cmp.Compare(i.ID(), j.ID())
-	})
-
-	for _, dev := range devs2 {
-		if err := config.Vehicles().Add(dev); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
 
 func configureSponsorship(token string) (err error) {
 	if settings.Exists(keys.SponsorToken) {
@@ -805,7 +684,7 @@ func configureEEBus(conf *eebus.Config) error {
 	return nil
 }
 
-func configureMessengers(confMessaging *globalconfig.Messaging, confEvents *globalconfig.MessagingEvents, vehicles messenger.Vehicles, valueChan chan<- util.Param, cache *util.ParamCache) (chan messenger.Event, error) {
+func configureMessengers(confMessaging *globalconfig.Messaging, confEvents *globalconfig.MessagingEvents, valueChan chan<- util.Param, cache *util.ParamCache) (chan messenger.Event, error) {
 	// yaml config from file
 	if len(confMessaging.Events) != 0 || len(confMessaging.Services) != 0 {
 		yamlSource.messaging = globalconfig.YamlSourceFile
@@ -875,7 +754,7 @@ func configureMessengers(confMessaging *globalconfig.Messaging, confEvents *glob
 		events = confMessaging.Events
 	}
 
-	messageHub, err := messenger.NewHub(events, vehicles, cache)
+	messageHub, err := messenger.NewHub(events, cache)
 
 	if err != nil {
 		return messageChan, fmt.Errorf("failed configuring push services: %w", err)
@@ -1094,10 +973,6 @@ func configureDevices(conf globalconfig.All) error {
 
 	if err := configureChargers(conf.Chargers, references.charger...); err != nil {
 		errs = append(errs, &ClassError{ClassCharger, err})
-	}
-
-	if err := configureVehicles(conf.Vehicles); err != nil {
-		errs = append(errs, &ClassError{ClassVehicle, err})
 	}
 
 	if err := configureCircuits(&conf.Circuits); err != nil {

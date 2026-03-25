@@ -8,7 +8,6 @@ products:
       generic: THZ (SG Ready)
 group: heating
 # requirements:
-#   evcc: ["sponsorship"]
 params:
   - name: modbus
     choice: ["tcpip"]

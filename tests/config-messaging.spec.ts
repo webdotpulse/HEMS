@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { start, stop, restart, baseUrl } from "./evcc";
 import { expectModalHidden, expectModalVisible, editorClear, editorPaste } from "./utils";
 
-const CONFIG_WITH_MESSAGING = "config-messaging.evcc.yaml";
+const CONFIG_WITH_MESSAGING = "config-messaging.ems.yaml";
 const CONFIG_MESSAGING_LEGACY = "messaging-legacy.sql";
 
 test.use({ baseURL: baseUrl() });
@@ -67,7 +67,7 @@ test.describe("messaging", async () => {
     await expect(card).toContainText(["Configured", "yes"].join(""));
   });
 
-  test("messaging from evcc.yaml", async ({ page }) => {
+  test("messaging from ems.yaml", async ({ page }) => {
     await start(CONFIG_WITH_MESSAGING);
     await page.goto("/#/config");
 

@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { start, stop, restart, baseUrl } from "./evcc";
 import { editorClear, editorPaste, expectModalHidden, expectModalVisible } from "./utils";
 
-const CONFIG_WITH_VEHICLE = "config-with-vehicle.evcc.yaml";
+const CONFIG_WITH_VEHICLE = "config-with-vehicle.ems.yaml";
 
 test.use({ baseURL: baseUrl() });
 test.describe.configure({ mode: "parallel" });

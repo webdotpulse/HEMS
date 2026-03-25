@@ -5,7 +5,6 @@ products:
       generic: Heatpump (API)
 group: heating
 requirements:
-  # evcc: ["sponsorship"]
   evcc: ["skiptest"]
   description:
     de: |

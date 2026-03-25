@@ -13,7 +13,7 @@ const mobile = devices["iPhone 12 Mini"].viewport;
 const desktop = devices["Desktop Chrome"].viewport;
 
 test.beforeAll(async () => {
-  await start("sessions.evcc.yaml", "sessions.sql");
+  await start("sessions.ems.yaml", "sessions.sql");
 });
 test.afterAll(async () => {
   await stop();

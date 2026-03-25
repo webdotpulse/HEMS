@@ -4,7 +4,7 @@ import { expectModalVisible, expectModalHidden, openTopNavigation } from "./util
 test.use({ baseURL: baseUrl() });
 
 test.beforeAll(async () => {
-  await start("battery-settings-co2.evcc.yaml");
+  await start("battery-settings-co2.ems.yaml");
 });
 test.afterAll(async () => {
   await stop();

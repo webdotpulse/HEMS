@@ -35,7 +35,6 @@ import (
 	"github.com/evcc-io/evcc/charger/semp"
 	"github.com/evcc-io/evcc/util"
 	"github.com/evcc-io/evcc/util/modbus"
-	"github.com/evcc-io/evcc/util/sponsor"
 )
 
 type sempHandler struct {
@@ -119,8 +118,6 @@ func NewBenderCC(ctx context.Context, uri string, id uint8, cache time.Duration)
 		return nil, err
 	}
 
-	if !sponsor.IsAuthorized() {
-		return nil, api.ErrSponsorRequired
 	}
 
 	log := util.NewLogger("bender")

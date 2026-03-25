@@ -9,7 +9,6 @@ import (
 	"github.com/Masterminds/sprig/v3"
 	"github.com/evcc-io/evcc/api"
 	"github.com/evcc-io/evcc/api/globalconfig"
-	"github.com/evcc-io/evcc/core/vehicle"
 	"github.com/evcc-io/evcc/util"
 )
 
@@ -19,21 +18,16 @@ type Event struct {
 	Event     string
 }
 
-type Vehicles interface {
-	// ByName returns a single vehicle adapter by name
-	ByName(string) (vehicle.API, error)
-}
 
 // Hub subscribes to event notifications and sends them to client devices
 type Hub struct {
 	definitions globalconfig.MessagingEvents
 	sender      []api.Messenger
 	cache       *util.ParamCache
-	vehicles    Vehicles
 }
 
 // NewHub creates push hub with definitions and receiver
-func NewHub(cc globalconfig.MessagingEvents, vv Vehicles, cache *util.ParamCache) (*Hub, error) {
+func NewHub(cc globalconfig.MessagingEvents, cache *util.ParamCache) (*Hub, error) {
 	// keep only enabled events
 	filtered := make(globalconfig.MessagingEvents, len(cc))
 
@@ -56,7 +50,6 @@ func NewHub(cc globalconfig.MessagingEvents, vv Vehicles, cache *util.ParamCache
 	h := &Hub{
 		definitions: filtered,
 		cache:       cache,
-		vehicles:    vv,
 	}
 
 	return h, nil
@@ -91,19 +84,6 @@ func (h *Hub) apply(ev Event, tmpl string) (string, error) {
 	}
 
 	// add missing attributes
-	if name, ok := attr["vehicleName"].(string); ok {
-		if v, err := h.vehicles.ByName(name); err == nil {
-			attr["vehicleLimitSoc"] = v.GetLimitSoc()
-			attr["vehicleMinSoc"] = v.GetMinSoc()
-			attr["vehiclePlanTime"], attr["vehiclePlanSoc"] = v.GetPlanSoc()
-
-			instance := v.Instance()
-			attr["vehicleTitle"] = instance.GetTitle()
-			attr["vehicleIcon"] = instance.Icon()
-			attr["vehicleCapacity"] = instance.Capacity()
-		}
-	}
-
 	return util.ReplaceFormatted(tmpl, attr)
 }
 

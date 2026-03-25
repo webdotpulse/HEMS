@@ -15,7 +15,7 @@ test.afterEach(async () => {
 
 test.describe("sponsor token", () => {
   test("token from YAML config", async ({ page }) => {
-    await start("sponsor.evcc.yaml");
+    await start("sponsor.ems.yaml");
     await page.goto("/#/config");
 
     // Check fatal error
@@ -31,7 +31,7 @@ test.describe("sponsor token", () => {
 
     await expect(tokenInput).toHaveValue(SHORT_TOKEN);
     await expect(tokenInput).toHaveClass(/is-invalid/);
-    await expect(modal.getByText("via evcc.yaml")).toBeVisible();
+    await expect(modal.getByText("via ems.yaml")).toBeVisible();
     await expect(modal.getByRole("button", { name: "Remove" })).not.toBeVisible();
   });
 
@@ -46,7 +46,7 @@ test.describe("sponsor token", () => {
       .click();
 
     const modal = page.getByTestId("sponsor-modal");
-    await expect(modal.getByText("via evcc.yaml")).not.toBeVisible();
+    await expect(modal.getByText("via ems.yaml")).not.toBeVisible();
 
     // Click change button to reveal textarea
     await modal.getByRole("button", { name: "Change token" }).click();

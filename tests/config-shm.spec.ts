@@ -8,7 +8,7 @@ test.afterEach(async () => {
   await stop();
 });
 
-const CONFIG = "basics.evcc.yaml";
+const CONFIG = "basics.ems.yaml";
 const VALID_VENDOR_ID = "ABCD1234";
 const VALID_DEVICE_ID = "1234567890AB";
 const VALID_DEVICE_SERIAL = "AABBCCDDEEFF";

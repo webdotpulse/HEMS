@@ -5,7 +5,6 @@ products:
       generic: wBX16
 capabilities: ["rfid", "1p3p"]
 requirements:
-  evcc: ["sponsorship"]
 params:
   - name: modbus
     choice: ["rs485"]

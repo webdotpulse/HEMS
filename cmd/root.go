@@ -71,7 +71,7 @@ var rootCmd = &cobra.Command{
 func init() {
 	viper = vpr.NewWithOptions(vpr.ExperimentalBindStruct())
 
-	viper.SetEnvPrefix("evcc")
+	viper.SetEnvPrefix("ems")
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	viper.AutomaticEnv() // read in environment variables that match
 
@@ -353,7 +353,7 @@ func runRoot(cmd *cobra.Command, args []string) {
 	// setup messaging
 	var pushChan chan messenger.Event
 	if err == nil {
-		pushChan, err = configureMessengers(&conf.Messaging, &conf.MessagingEvents, site.Vehicles(), valueChan, cache)
+		pushChan, err = configureMessengers(&conf.Messaging, &conf.MessagingEvents, valueChan, cache)
 		err = wrapErrorWithClass(ClassMessenger, err)
 	}
 

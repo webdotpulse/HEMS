@@ -4,7 +4,6 @@ products:
     description:
       generic: Gen2
 requirements:
-  evcc: ["sponsorship"]
 capabilities: ["1p3p", "mA"]
 params:
   - name: modbus

@@ -5,7 +5,7 @@ products:
       generic: AC011E
 capabilities: ["mA", "rfid"]
 requirements:
-  evcc: ["sponsorship", "skiptest"]
+  evcc: ["skiptest"]
 params:
   - preset: ocpp
 render: |

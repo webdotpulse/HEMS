@@ -2,7 +2,7 @@ import { test, expect, type Page, type Locator } from "@playwright/test";
 import { start, stop, baseUrl } from "./evcc";
 import { expectModalVisible, expectModalHidden, openTopNavigation, dragElement } from "./utils";
 
-const CONFIG_LOADPOINT_SORT = "loadpoint-sort.evcc.yaml";
+const CONFIG_LOADPOINT_SORT = "loadpoint-sort.ems.yaml";
 
 test.use({ baseURL: baseUrl() });
 test.describe.configure({ mode: "parallel" });
