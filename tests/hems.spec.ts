@@ -10,7 +10,7 @@ test.afterEach(async () => {
   await stop();
 });
 
-const CONFIG = "fast.evcc.yaml";
+const CONFIG = "fast.ems.yaml";
 
 test.describe("HEMS", () => {
   test("grid sessions", async ({ page }) => {
@@ -30,14 +30,14 @@ test.describe("HEMS", () => {
 
     await expect(hemsModal.getByTestId("yaml-editor")).toBeVisible();
     await expect(hemsModal.getByRole("button", { name: "Save" })).toBeVisible();
-    await expect(hemsModal).not.toContainText("Configured via evcc.yaml");
+    await expect(hemsModal).not.toContainText("Configured via ems.yaml");
 
     await hemsModal.getByRole("button", { name: "Cancel" }).click();
     await expectModalHidden(hemsModal);
   });
 
   test("modal yaml-configured", async ({ page }) => {
-    await start("hems-yaml.evcc.yaml");
+    await start("hems-yaml.ems.yaml");
     await page.goto("/#/config");
 
     await page.getByTestId("hems").getByRole("button", { name: "edit" }).click();
@@ -45,7 +45,7 @@ test.describe("HEMS", () => {
     await expectModalVisible(hemsModal);
 
     await expect(hemsModal.getByTestId("grid-sessions")).not.toBeVisible();
-    await expect(hemsModal).toContainText("Configured via evcc.yaml");
+    await expect(hemsModal).toContainText("Configured via ems.yaml");
     await expect(hemsModal.getByTestId("yaml-editor")).not.toBeVisible();
     await expect(hemsModal.getByRole("button", { name: "Save" })).not.toBeVisible();
     await expect(hemsModal.getByRole("button", { name: "Cancel" })).toBeVisible();
@@ -55,7 +55,7 @@ test.describe("HEMS", () => {
   });
 
   test("external control without circuits", async ({ page }) => {
-    const GRID_CONFIG = "hems-grid.evcc.yaml";
+    const GRID_CONFIG = "hems-grid.ems.yaml";
     await startSimulator();
     await start(GRID_CONFIG);
 
@@ -110,7 +110,7 @@ limit:
   });
 
   test("external control with circuits", async ({ page }) => {
-    const GRID_CONFIG = "hems-grid.evcc.yaml";
+    const GRID_CONFIG = "hems-grid.ems.yaml";
     await start(GRID_CONFIG);
 
     await page.goto("/#/config");

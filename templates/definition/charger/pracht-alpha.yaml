@@ -13,7 +13,6 @@ products:
     description:
       generic: PNI
 requirements:
-  evcc: ["sponsorship"]
 params:
   - name: modbus
     choice: ["rs485", "tcpip"]

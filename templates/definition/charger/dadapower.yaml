@@ -5,7 +5,6 @@ products:
       generic: Premium Wallbox
 capabilities: ["1p3p", "mA", "rfid"]
 requirements:
-  evcc: ["sponsorship"]
 params:
   - name: modbus
     choice: ["tcpip"]

@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { start, stop, restart, baseUrl } from "./evcc";
 import { expectModalVisible, expectModalHidden, editorClear, editorPaste } from "./utils";
 
-const CONFIG_YAML = "config-circuit.evcc.yaml";
+const CONFIG_YAML = "config-circuit.ems.yaml";
 
 test.use({ baseURL: baseUrl() });
 

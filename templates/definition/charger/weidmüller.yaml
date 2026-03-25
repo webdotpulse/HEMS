@@ -5,7 +5,6 @@ products:
       generic: AC Smart
 capabilities: ["1p3p", "rfid"]
 requirements:
-  evcc: ["sponsorship"]
 params:
   - name: host
 render: |

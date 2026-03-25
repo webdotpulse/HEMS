@@ -25,7 +25,6 @@ import (
 	"github.com/evcc-io/evcc/api"
 	"github.com/evcc-io/evcc/charger/semp"
 	"github.com/evcc-io/evcc/util"
-	"github.com/evcc-io/evcc/util/sponsor"
 )
 
 // SEMP charger implementation
@@ -60,8 +59,6 @@ func NewSEMPFromConfig(ctx context.Context, other map[string]any) (api.Charger, 
 		Cache: 5 * time.Second,
 	}
 
-	if !sponsor.IsAuthorized() {
-		return nil, api.ErrSponsorRequired
 	}
 
 	if err := util.DecodeOther(other, &cc); err != nil {

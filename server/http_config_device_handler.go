@@ -24,7 +24,6 @@ import (
 	"github.com/evcc-io/evcc/util"
 	"github.com/evcc-io/evcc/util/config"
 	"github.com/evcc-io/evcc/util/templates"
-	"github.com/evcc-io/evcc/vehicle"
 	"github.com/gorilla/mux"
 	"go.yaml.in/yaml/v4"
 )
@@ -71,9 +70,6 @@ func devicesConfigHandler(w http.ResponseWriter, r *http.Request) {
 
 	case templates.Charger:
 		res, err = devicesConfig(class, config.Chargers(), hidePrivate)
-
-	case templates.Vehicle:
-		res, err = devicesConfig(class, config.Vehicles(), hidePrivate)
 
 	case templates.Circuit:
 		res, err = devicesConfig(class, config.Circuits(), hidePrivate)
@@ -198,9 +194,6 @@ func deviceConfigHandler(w http.ResponseWriter, r *http.Request) {
 	case templates.Charger:
 		res, err = deviceConfig(class, id, config.Chargers(), hidePrivate)
 
-	case templates.Vehicle:
-		res, err = deviceConfig(class, id, config.Vehicles(), hidePrivate)
-
 	case templates.Circuit:
 		res, err = deviceConfig(class, id, config.Circuits(), hidePrivate)
 
@@ -259,9 +252,6 @@ func deviceStatusHandler(w http.ResponseWriter, r *http.Request) {
 
 	case templates.Charger:
 		instance, err = deviceStatus(name, config.Chargers())
-
-	case templates.Vehicle:
-		instance, err = deviceStatus(name, config.Vehicles())
 
 	case templates.Circuit:
 		instance, err = deviceStatus(name, config.Circuits())
@@ -322,9 +312,6 @@ func newDeviceHandler(w http.ResponseWriter, r *http.Request) {
 
 	case templates.Meter:
 		conf, err = newDevice(ctx, class, req, meter.NewFromConfig, config.Meters(), force)
-
-	case templates.Vehicle:
-		conf, err = newDevice(ctx, class, req, vehicle.NewFromConfig, config.Vehicles(), force)
 
 	case templates.Circuit:
 		conf, err = newDevice(ctx, class, req, func(ctx context.Context, _ string, other map[string]any) (api.Circuit, error) {
@@ -409,9 +396,6 @@ func updateDeviceHandler(w http.ResponseWriter, r *http.Request) {
 
 	case templates.Meter:
 		err = updateDevice(ctx, id, class, req, meter.NewFromConfig, config.Meters(), force)
-
-	case templates.Vehicle:
-		err = updateDevice(ctx, id, class, req, vehicle.NewFromConfig, config.Vehicles(), force)
 
 	case templates.Circuit:
 		err = updateDevice(ctx, id, class, req, func(ctx context.Context, _ string, other map[string]any) (api.Circuit, error) {
@@ -569,9 +553,6 @@ func deleteDeviceHandler(site site.API) func(w http.ResponseWriter, r *http.Requ
 				}
 			}
 
-		case templates.Vehicle:
-			err = deleteDevice(id, config.Vehicles())
-
 			// cleanup references
 			for _, dev := range h.Devices() {
 				lp := dev.Instance()
@@ -665,9 +646,6 @@ func testConfigHandler(w http.ResponseWriter, r *http.Request) {
 
 	case templates.Meter:
 		instance, err = testConfig(ctx, id, class, req, meter.NewFromConfig, config.Meters())
-
-	case templates.Vehicle:
-		instance, err = testConfig(ctx, id, class, req, vehicle.NewFromConfig, config.Vehicles())
 
 	case templates.Circuit:
 		err = api.ErrNotAvailable

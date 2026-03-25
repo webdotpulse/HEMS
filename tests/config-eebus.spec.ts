@@ -108,7 +108,7 @@ test.describe("eebus", async () => {
   });
 
   test("configured in yaml", async ({ page }) => {
-    await start("config-eebus.evcc.yaml");
+    await start("config-eebus.ems.yaml");
     await page.goto("/#/config");
 
     await page.getByTestId("eebus").getByRole("button", { name: "edit" }).click();
@@ -116,7 +116,7 @@ test.describe("eebus", async () => {
     await expectModalVisible(modal);
 
     // yaml configuration note is visible
-    await expect(modal.getByText("Configured via evcc.yaml", { exact: false })).toBeVisible();
+    await expect(modal.getByText("Configured via ems.yaml", { exact: false })).toBeVisible();
 
     // SHIP-ID readonly field is visible with configured value
     await expect(modal.getByLabel("SHIP-ID")).toBeVisible();

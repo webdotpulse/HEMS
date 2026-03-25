@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { start, stop, baseUrl } from "./evcc";
 import { expectModalHidden, expectModalVisible } from "./utils";
 
-const CONFIG = "smart-feedin.evcc.yaml";
+const CONFIG = "smart-feedin.ems.yaml";
 
 test.use({ baseURL: baseUrl() });
 test.describe.configure({ mode: "parallel" });

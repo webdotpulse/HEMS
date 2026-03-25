@@ -4,8 +4,8 @@ import { start, stop, baseUrl } from "./evcc";
 test.use({ baseURL: baseUrl() });
 
 test.describe("fatal", async () => {
-  test("evcc yaml error", async ({ page }) => {
-    const instance = await start("fatal-syntax.evcc.yaml");
+  test("ems.yaml error", async ({ page }) => {
+    const instance = await start("fatal-syntax.ems.yaml");
     await page.goto("/");
     const offline = page.getByTestId("offline-indicator");
     await expect(offline.getByTestId("bottom-banner")).toBeVisible();
@@ -15,7 +15,7 @@ test.describe("fatal", async () => {
     await stop(instance);
   });
   test("database error", async ({ page }) => {
-    const instance = await start("fatal-db.evcc.yaml");
+    const instance = await start("fatal-db.ems.yaml");
     await page.goto("/");
     const offline = page.getByTestId("offline-indicator");
     await expect(offline.getByTestId("bottom-banner")).toBeVisible();

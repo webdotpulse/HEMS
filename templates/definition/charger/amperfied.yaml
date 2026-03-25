@@ -8,7 +8,6 @@ products:
       generic: Wallbox connect.business
 capabilities: ["mA", "rfid"]
 requirements:
-  evcc: ["sponsorship"]
 params:
   - name: modbus
     choice: ["tcpip"]

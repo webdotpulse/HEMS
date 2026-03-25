@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { start, stop, baseUrl } from "./evcc";
 
-const CONFIG = "config-with-tariffs.evcc.yaml";
+const CONFIG = "config-with-tariffs.ems.yaml";
 
 test.use({ baseURL: baseUrl() });
 

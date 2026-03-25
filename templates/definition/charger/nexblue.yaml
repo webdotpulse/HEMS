@@ -4,7 +4,6 @@ products:
     description:
       generic: Edge 2
 requirements:
-  evcc: ["sponsorship"]
 params:
   - name: user
   - name: password

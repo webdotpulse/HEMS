@@ -4,7 +4,7 @@ import { start, stop, baseUrl } from "./evcc";
 test.use({ baseURL: baseUrl() });
 
 test.beforeEach(async () => {
-  await start("vehicle-error.evcc.yaml");
+  await start("vehicle-error.ems.yaml");
 });
 
 test.afterEach(async () => {

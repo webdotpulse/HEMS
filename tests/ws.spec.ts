@@ -5,7 +5,7 @@ test.use({ baseURL: baseUrl() });
 test.describe.configure({ mode: "parallel" });
 
 test.beforeEach(async () => {
-  await start("basics.evcc.yaml");
+  await start("basics.ems.yaml");
 });
 test.afterEach(async () => {
   await stop();

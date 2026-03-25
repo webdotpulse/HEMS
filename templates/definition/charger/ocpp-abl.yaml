@@ -14,7 +14,7 @@ products:
       generic: eM4 Twin (OCPP)
 capabilities: ["mA", "rfid"]
 requirements:
-  evcc: ["sponsorship", "skiptest"]
+  evcc: ["skiptest"]
 params:
   - preset: ocpp
 render: |

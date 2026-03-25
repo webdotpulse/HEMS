@@ -8,7 +8,7 @@ products:
       generic: AC Compact
 capabilities: ["mA"]
 requirements:
-  evcc: ["sponsorship", "skiptest"]
+  evcc: ["skiptest"]
   description:
     de: |
       Anleitung:

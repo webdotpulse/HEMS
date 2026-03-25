@@ -9,7 +9,7 @@ import {
 } from "./simulator";
 import { expectModalHidden, expectModalVisible } from "./utils";
 
-const CONFIG_ONE_LP = "config-one-lp.evcc.yaml";
+const CONFIG_ONE_LP = "config-one-lp.ems.yaml";
 
 test.use({ baseURL: baseUrl() });
 

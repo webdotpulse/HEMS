@@ -8,7 +8,7 @@ products:
       generic: ONE EV Charger Pro
 capabilities: ["rfid"]
 requirements:
-  evcc: ["sponsorship", "skiptest"]
+  evcc: ["skiptest"]
 params:
   - preset: ocpp
 render: |

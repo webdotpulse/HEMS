@@ -4,7 +4,7 @@ import { start, stop, baseUrl } from "./evcc";
 test.use({ baseURL: baseUrl() });
 
 test.beforeAll(async () => {
-  await start("smart-cost-only.evcc.yaml");
+  await start("smart-cost-only.ems.yaml");
 });
 test.afterAll(async () => {
   await stop();

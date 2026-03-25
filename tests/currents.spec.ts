@@ -4,7 +4,7 @@ import { expectModalVisible } from "./utils";
 test.use({ baseURL: baseUrl() });
 
 test.beforeAll(async () => {
-  await start("basics.evcc.yaml");
+  await start("basics.ems.yaml");
 });
 test.afterAll(async () => {
   await stop();

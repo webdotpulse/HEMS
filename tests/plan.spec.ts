@@ -6,9 +6,9 @@ test.describe.configure({ mode: "parallel" });
 
 const mobile = devices["iPhone 12 Mini"].viewport;
 
-const CONFIG = "plan.evcc.yaml";
-const CONFIG_NO_TARIFF = "basics.evcc.yaml";
-const CONFIG_FIXED_TARIFF = "plan-fixed-tariff.evcc.yaml";
+const CONFIG = "plan.ems.yaml";
+const CONFIG_NO_TARIFF = "basics.ems.yaml";
+const CONFIG_FIXED_TARIFF = "plan-fixed-tariff.ems.yaml";
 
 test.beforeEach(async () => {
   await start(CONFIG);
@@ -685,7 +685,7 @@ test.describe("repeating", async () => {
   });
 });
 
-// add test for precondition, start with basic.evcc.yaml and verify that precondition toggle element is not visible. make dedicated describe block
+// add test for precondition, start with basic.ems.yaml and verify that precondition toggle element is not visible. make dedicated describe block
 test.describe("plan strategy", async () => {
   test("only if dynamic tariff exists", async ({ page }) => {
     await restart(CONFIG_NO_TARIFF);

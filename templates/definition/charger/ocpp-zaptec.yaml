@@ -10,7 +10,7 @@ requirements:
       OCPP 1.6J (Box-Level Integration)
 
       https://docs.zaptec.com/docs/ocpp16j
-  evcc: ["sponsorship", "skiptest"]
+  evcc: ["skiptest"]
 params:
   - preset: ocpp
 render: |

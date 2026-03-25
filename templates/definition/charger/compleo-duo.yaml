@@ -5,7 +5,6 @@ products:
       generic: Duo
 capabilities: ["mA", "rfid", "1p3p"]
 requirements:
-  evcc: ["sponsorship"]
 params:
   - name: modbus
     choice: ["tcpip"]

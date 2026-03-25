@@ -7,7 +7,7 @@ import {
   expectTopNavigationClosed,
 } from "./utils";
 
-const CONFIG_GRID_ONLY = "config-grid-only.evcc.yaml";
+const CONFIG_GRID_ONLY = "config-grid-only.ems.yaml";
 const NETWORK_HOST = "somehostname.local";
 const NETWORK_EXTERNAL_URL = "https://ext.evcc.example";
 

@@ -4,7 +4,6 @@ products:
     description:
       generic: Garo
 requirements:
-  evcc: ["sponsorship"]
   description:
     de: Es können momentan nur als Master konfigurierte Geräte verwendet werden!
     en: Only devices configured as master can be used right now!

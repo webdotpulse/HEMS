@@ -10,7 +10,7 @@ products:
     description:
       generic: Station
 requirements:
-  evcc: ["sponsorship", "skiptest"]
+  evcc: ["skiptest"]
 params:
   - preset: ocpp
 render: |

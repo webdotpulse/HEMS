@@ -2,8 +2,8 @@ import { test, expect, type Page } from "@playwright/test";
 import { start, stop, restart, baseUrl } from "./evcc";
 import { editorClear, editorPaste, expectModalHidden, expectModalVisible } from "./utils";
 
-const CONFIG_GRID_ONLY = "config-grid-only.evcc.yaml";
-const CONFIG_BASICS = "basics.evcc.yaml";
+const CONFIG_GRID_ONLY = "config-grid-only.ems.yaml";
+const CONFIG_BASICS = "basics.ems.yaml";
 
 test.use({ baseURL: baseUrl() });
 

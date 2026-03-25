@@ -110,7 +110,7 @@ test.describe("invalid references", async () => {
 
   test("vehicle", async ({ page }) => {
     // Start with YAML file containing one vehicle
-    await start("config-invalid-references-vehicle.evcc.yaml");
+    await start("config-invalid-references-vehicle.ems.yaml");
     await page.goto("/#/config");
 
     const lpModal = page.getByTestId("loadpoint-modal");

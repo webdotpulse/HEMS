@@ -4,7 +4,6 @@ products:
     description:
       generic: PowerBrain Meter
 requirements:
-  evcc: ["sponsorship"]
 params:
   - name: usage
     choice: ["charge"]

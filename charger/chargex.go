@@ -27,7 +27,6 @@ import (
 	"github.com/evcc-io/evcc/api"
 	"github.com/evcc-io/evcc/util"
 	"github.com/evcc-io/evcc/util/modbus"
-	"github.com/evcc-io/evcc/util/sponsor"
 )
 
 // https://blog.chargex.de/hubfs/Customer%20Support/ChargeX%20Modbus%20TCP%20documentation.pdf
@@ -87,8 +86,6 @@ func NewChargeX(ctx context.Context, uri string, id uint8, connector uint16) (ap
 		return nil, err
 	}
 
-	if !sponsor.IsAuthorized() {
-		return nil, api.ErrSponsorRequired
 	}
 
 	log := util.NewLogger("chargex")

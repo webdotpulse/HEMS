@@ -27,7 +27,6 @@ import (
 	"github.com/evcc-io/evcc/api"
 	"github.com/evcc-io/evcc/util"
 	"github.com/evcc-io/evcc/util/request"
-	"github.com/evcc-io/evcc/util/sponsor"
 	"github.com/evcc-io/evcc/util/transport"
 )
 
@@ -165,8 +164,6 @@ func NewEVECUBE(uri, user, password string, connector int, cache time.Duration) 
 		wb.Client.Transport = transport.BasicAuth(user, password, wb.Client.Transport)
 	}
 
-	if !sponsor.IsAuthorized() {
-		return nil, api.ErrSponsorRequired
 	}
 
 	return wb, nil

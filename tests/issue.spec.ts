@@ -17,11 +17,11 @@ test.afterEach(async () => {
   await stop();
 });
 
-const REDACT_CONFIG = "sponsor.evcc.yaml";
-const CONFIG = "issue.evcc.yaml";
+const REDACT_CONFIG = "sponsor.ems.yaml";
+const CONFIG = "issue.ems.yaml";
 
 test.describe("issue creation", () => {
-  test("verify evcc.yaml redaction", async ({ page }) => {
+  test("verify ems.yaml redaction", async ({ page }) => {
     await start(REDACT_CONFIG);
     await page.goto("/#/issue");
 
@@ -147,7 +147,7 @@ test.describe("issue creation", () => {
     const textarea = summaryModal.getByTestId("issue-summary-modal-textarea");
     await expect(textarea).toBeVisible();
     const textareaContent = await textarea.inputValue();
-    expect(textareaContent).toContain("carport_pv"); // from evcc.yaml
+    expect(textareaContent).toContain("carport_pv"); // from ems.yaml
     expect(textareaContent).toContain("shelly"); // from ui config
     expect(textareaContent).toContain("DEBUG"); // from logs
     expect(textareaContent).toContain('"telemetry":'); // from state
@@ -158,7 +158,7 @@ test.describe("issue creation", () => {
       .getAttribute("href");
     expect(href).toContain("https://github.com/evcc-io/evcc/issues/new?title=Kaboom&body=");
     expect(href).not.toContain("TestShelly"); // from ui config
-    expect(href).not.toContain("carport_pv"); // from evcc.yaml
+    expect(href).not.toContain("carport_pv"); // from ems.yaml
 
     // close modal
     await summaryModal.getByRole("button", { name: "Close" }).click();
@@ -183,7 +183,7 @@ test.describe("issue creation", () => {
       .getAttribute("href");
     expect(href).toContain("https://github.com/evcc-io/evcc/issues/new?title=Kaboom&body=");
     expect(href).toContain("shelly"); // from ui config
-    expect(href).toContain("carport_pv"); // from evcc.yaml
+    expect(href).toContain("carport_pv"); // from ems.yaml
     expect(href).toContain("DEBUG"); // from logs
     expect(href).toContain("MyFancyState"); // from state
   });

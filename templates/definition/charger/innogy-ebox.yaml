@@ -11,7 +11,6 @@ products:
       generic: eBox
 capabilities: ["mA"]
 requirements:
-  evcc: ["sponsorship"]
 params:
   - name: modbus
     choice: ["tcpip"]

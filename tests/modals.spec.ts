@@ -3,7 +3,7 @@ import { start, stop, baseUrl } from "./evcc";
 import { startSimulator, stopSimulator, simulatorConfig } from "./simulator";
 import { openTopNavigation, expectTopNavigationClosed, closeTopNavigation } from "./utils";
 
-const BASICS_CONFIG = "basics.evcc.yaml";
+const BASICS_CONFIG = "basics.ems.yaml";
 
 const UI_ROUTES = [
   { path: "/" },

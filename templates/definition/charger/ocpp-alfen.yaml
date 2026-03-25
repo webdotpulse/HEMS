@@ -5,7 +5,7 @@ products:
       generic: Eve (OCPP)
 capabilities: ["mA", "rfid", "1p3p"]
 requirements:
-  evcc: ["sponsorship", "skiptest"]
+  evcc: ["skiptest"]
 params:
   - preset: ocpp
 render: |

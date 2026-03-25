@@ -71,8 +71,6 @@ func NewHeatpumpFromConfig(ctx context.Context, other map[string]any) (api.Charg
 		return nil, err
 	}
 
-	// if !sponsor.IsAuthorized() {
-	// 	return nil, api.ErrSponsorRequired
 	// }
 
 	res, err := NewHeatpump(ctx, &cc.embed, maxPowerS, maxPowerG)

@@ -14,7 +14,6 @@ products:
       generic: Charge Core
 capabilities: ["1p3p", "rfid"]
 requirements:
-  evcc: ["sponsorship"]
 params:
   - name: user
     required: true

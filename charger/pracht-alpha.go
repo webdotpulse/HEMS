@@ -26,7 +26,6 @@ import (
 	"github.com/evcc-io/evcc/api"
 	"github.com/evcc-io/evcc/util"
 	"github.com/evcc-io/evcc/util/modbus"
-	"github.com/evcc-io/evcc/util/sponsor"
 )
 
 // PrachtAlpha charger implementation
@@ -81,8 +80,6 @@ func NewPrachtAlpha(ctx context.Context, uri, device, comset string, baudrate in
 		conn.Timeout(timeout)
 	}
 
-	if !sponsor.IsAuthorized() {
-		return nil, api.ErrSponsorRequired
 	}
 
 	log := util.NewLogger("pracht")
