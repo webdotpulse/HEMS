@@ -49,27 +49,6 @@
 					</router-link>
 				</div>
 			</div>
-			<Loadpoints
-				v-else
-				:key="`loadpoints-${orderedVisibleLoadpoints.length}`"
-				class="mt-1 mt-sm-2 flex-grow-1"
-				:loadpoints="orderedVisibleLoadpoints"
-				:vehicles="vehicleList"
-				:smartCostType="smartCostType"
-				:smartCostAvailable="smartCostAvailable"
-				:smartFeedInPriorityAvailable="smartFeedInPriorityAvailable"
-				:tariffGrid="tariffGrid"
-				:tariffCo2="tariffCo2"
-				:tariffFeedIn="tariffFeedIn"
-				:currency="currency"
-				:gridConfigured="gridConfigured"
-				:pvConfigured="pvConfigured"
-				:batteryConfigured="batteryConfigured"
-				:batterySoc="batterySoc"
-				:forecast="forecast"
-				:selectedId="selectedLoadpointId"
-				@id-changed="selectedLoadpointChanged"
-			/>
 			<Footer v-bind="footer"></Footer>
 		</div>
 	</div>
@@ -80,7 +59,6 @@ import "@h2d2/shopicons/es/regular/arrowup";
 import TopNavigationArea from "../Top/TopNavigationArea.vue";
 import Energyflow from "../Energyflow/Energyflow.vue";
 import HemsWarning from "../HemsWarning.vue";
-import Loadpoints from "../Loadpoints/Loadpoints.vue";
 import Footer from "../Footer/Footer.vue";
 import formatter from "@/mixins/formatter";
 import collector from "@/mixins/collector.ts";
@@ -99,13 +77,11 @@ import type {
 	FatalError,
 	EvOpt,
 } from "@/types/evcc";
-import store from "@/store";
 import type { Grid } from "./types";
 
 export default defineComponent({
 	name: "Site",
 	components: {
-		Loadpoints,
 		Energyflow,
 		Footer,
 		HemsWarning,
@@ -147,8 +123,6 @@ export default defineComponent({
 		tariffCo2: Number,
 		tariffPriceHome: Number,
 		tariffCo2Home: Number,
-		tariffPriceLoadpoints: Number,
-		tariffCo2Loadpoints: Number,
 
 		availableVersion: String,
 		releaseNotes: String,
@@ -167,12 +141,6 @@ export default defineComponent({
 		evopt: { type: Object as PropType<EvOpt> },
 	},
 	computed: {
-		loadpoints() {
-			return store.uiLoadpoints.value || [];
-		},
-		orderedVisibleLoadpoints() {
-			return this.loadpoints.filter((lp) => lp.visible);
-		},
 		batterySoc() {
 			return this.battery?.soc;
 		},
